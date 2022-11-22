@@ -1,0 +1,13 @@
+const { body } = require('express-validator');
+
+exports.validateLogin = [
+    body('phone_number')
+        .exists()
+        .isLength({ min: 10, max: 30})
+        .withMessage('Must be [3: 30] chars long'),
+    body('password')
+        .exists()
+        .withMessage('Password is required')
+        .notEmpty()
+        .withMessage('Password must be filled')
+];
