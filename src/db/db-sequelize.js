@@ -9,7 +9,8 @@ const db_sequelize = new Sequelize(
         host:  config.host,
         port: config.db_port,
         dialect: 'mysql',
-        logging,   
+        logging,  
+        socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock' 
     },
 );
 //  db_sequelize.sync({force: true});
