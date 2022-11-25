@@ -1,6 +1,6 @@
 {
     "dev": {
-      "host": "localhost",
+      "host": "127.0.0.1",
       "port": {"ENV" : "DB_PORT"},
       "user": { "ENV" : "DB_USER" },
       "password" : { "ENV" : "DB_PASS" },
