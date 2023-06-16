@@ -4,7 +4,7 @@ const ProductModel = require('../../models/product.model');
 
 class ProductControler {
     getAll = async(req, res, next) => {
-        const model = await ProductModel.findAll(req.body)
+        const model = await ProductModel.findAll()
         res.send({
             error_code: 201,
             error: false,
@@ -31,7 +31,17 @@ class ProductControler {
      }
    create = async(req, res, next) =>{
     this.checkValidation(req)
-    const model = await ProductModel.create(req.body);
+    let data= req.body;
+    console.log(data)
+    const model = await ProductModel.create({
+        "title": data.title,
+        "desc": data.desc,
+        "img": data.file,
+        "categories": data.categories,
+        "size": data.size,
+        "price": data.price,
+        "color": data.color,
+    });
     if(!model){
         new HttpException(404, "model topilmadi")
     }
@@ -57,7 +67,7 @@ class ProductControler {
     let body = req.body;
     model.title = body.title,
     model.desc = body.desc,
-    model.img = body.img,
+    model.img = body.file,
     model.categories = body.categories,
     model.size = body.size,
     model.price = body.price,

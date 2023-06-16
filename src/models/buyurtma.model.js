@@ -1,5 +1,8 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db/db-sequelize');
+const ProductModel = require('./product.model');
+const regionModel = require('./region.model');
+const districtModel = require('./district.model');
 class buyurtmaModel extends Model {
     
 }
@@ -63,5 +66,7 @@ buyurtmaModel.init({
     }
   }
 });
-
+buyurtmaModel.belongsTo(ProductModel, {as: 'product', foreignKey: 'product_id'})
+buyurtmaModel.belongsTo(regionModel, {as: 'region', foreignKey: 'region_id'})
+buyurtmaModel.belongsTo(districtModel, {as: 'district', foreignKey: 'district_id'})
 module.exports = buyurtmaModel;

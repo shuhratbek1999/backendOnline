@@ -38,7 +38,8 @@ module.exports = function(app){
         app.use(`/api/v1/admin-app/region`, regionRouter); 
         app.use(`/api/v1/admin-app/district`, districtRouter); 
         app.use(`/api/v1/admin-app/buyurtma`, buyurtmaRouter); 
-        app.use(`/api/v1/uploads`, express.static('uploads'));
+        // app.use(`/api/v1/uploads`, express.static('uploads'));
+        app.use(`/api/v1/admin-app/`, express.static('upload'));
 
         // 404 error
         app.all('*', (req, res, next) => {

@@ -1,10 +1,19 @@
 const HttpException = require('../../utils/HttpException.utils');
 const { validationResult } = require('express-validator');
 const buyurtmaModel = require('../../models/buyurtma.model');
+const ProductModel = require('../../models/product.model');
+const regionModel = require('../../models/region.model');
+const districtModel = require('../../models/district.model');
 
 class buyurtmaController {
     getAll = async(req, res, next) => {
-        const model = await buyurtmaModel.findAll(req.body)
+        const model = await buyurtmaModel.findAll({
+            include:[
+                {model: ProductModel, as: 'product'},
+                {model: regionModel, as: 'region'},
+                {model: districtModel, as: 'district'},
+            ]
+        })
         res.send({
             error_code: 201,
             error: false,
@@ -17,7 +26,12 @@ class buyurtmaController {
         const model = await buyurtmaModel.findOne({
             where:{
                 id: req.params.id
-            }
+            },
+            include:[
+                {model: ProductModel, as: 'product'},
+                {model: regionModel, as: 'region'},
+                {model: districtModel, as: 'district'},
+            ]
         })
         if(!model){
             new HttpException(404, "bunday id yoq boshqa kriting")
